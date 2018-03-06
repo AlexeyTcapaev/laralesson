@@ -7,7 +7,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 
 class Tag extends Model
 {
-     use Sluggable;
+    use Sluggable;
     public function posts()
     {
         return $this->belongsToMany(
