@@ -92,7 +92,6 @@ class User extends Authenticatable
       }
       return $this->makeAdmin();
     }
-
     public function ban()
     {
         $this->status = User::IS_BANNED;
@@ -103,7 +102,6 @@ class User extends Authenticatable
         $this->status = User::IS_ACTIVE;
         $this->save();
     }
-
     public function toggleBan($value)
     {  
       if($value == null)
