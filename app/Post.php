@@ -10,7 +10,11 @@ class Post extends Model
 {
     use Sluggable;
 
+    const IS_DRAFT = 0;
+    const IS_PUBLIC = 1;
+
     protected $fillable = ['title','content'];
+
     public function category()
     {
         return $this->hasOne(Category::class);
@@ -77,12 +81,12 @@ class Post extends Model
     }
     public function setDraft()
     { 
-      $this->status = 0;
+      $this->status = Post::IS_DRAFT;
       $this->save();
     }
     public function setPublic()
     { 
-      $this->status = 1;
+      $this->status = Post::IS_PUBLIC;
       $this->save();
     }
     public function toggleStatus($value)
@@ -93,7 +97,6 @@ class Post extends Model
       }
       return $this->setPublic();
     }
-
     public function setFeatured()
     { 
       $this->if_featured = 1;
@@ -111,5 +114,14 @@ class Post extends Model
           return $this->setStandart();
       }
       return $this->setFeatured();
+    }
+    public function getImage()
+    {
+        if($this->image == null)
+        {
+            return '/img/default.png';
+        }
+        return '/uploads/' . $this->image;
+
     }
 }
